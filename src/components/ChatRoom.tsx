@@ -1,4 +1,3 @@
-// src/components/ChatRoom.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import { Message } from "../types/Message";
 import { chatMock } from '../mock/chatMok';

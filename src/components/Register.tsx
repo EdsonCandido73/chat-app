@@ -1,4 +1,3 @@
-// src/components/Register.tsx
 import { useState, FormEvent } from 'react';
 import { User } from "../types/User";
 
