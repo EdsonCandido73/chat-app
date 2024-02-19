@@ -1,8 +1,6 @@
 <h1 align="center">:speech_balloon: Chat App</h1>
 
-<p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/EdsonCandido73/chat-app">
-  
+<p align="center">    
   <a href="https://github.com/EdsonCandido73/chat-app/commits/master">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/EdsonCandido73/chat-app">
   </a>
