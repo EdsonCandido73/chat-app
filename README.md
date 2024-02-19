@@ -10,10 +10,10 @@
 
 ## :memo: Descrição
 * Aplicativo de chat em tempo real focando no front-end. Este aplicativo deve fornecer uma experiência dinâmica, moderna e interativa.
-Permitindo aos usuários se registrar, acessar diferentes salas de chat e simular a comunicação com outros usuários através de mensagens em tempo real.
+Permitindo ao usuário se registrar, acessar diferentes salas de chat e simular a comunicação com outros usuários através de mensagens em tempo real.
 
 ## :books: Como funciona
-* O usuário pode fazer seu cadastro e logar na aplicação, porém, como não há back-end o usuário não será salvo para futuro login. 
+* O usuário pode fazer seu cadastro e logar na aplicação, porém, como não há back-end o usuário não será salvo para futuros logins. 
 * Poderá fazer login com o usário padrão para teste:  usuário: Admin, senha: Teste123
 * Ao digitar uma mensagem nas salas de chat, a aplicação vai simular uma resposta aleatória de outro usuário.
 * Como não há back-end todas as salas estão acessando a mesma lista de conversas gravadas no localStorage.
