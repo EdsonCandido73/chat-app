@@ -1,12 +1,19 @@
 import React, { useState, useEffect  } from 'react';
 import Register from './components/Register';
 import Login from './components/Login';
+import ChatRoom from './components/ChatRoom';
+import CreateRoomModal from './components/CreateRoomModal';
+import RoomList from './components/RoomList';
 import { User } from "./types/User";
+import { Room } from "./types/Room";
 
 const App: React.FC = () => {
-  const [user, setUser] = useState<{ username: string; password: string } | null>(null);      
+  const [user, setUser] = useState<{ username: string; password: string } | null>(null);  
+  const [rooms, setRooms] = useState<Room[]>([]);
+  const [isCreateRoomModalOpen, setIsCreateRoomModalOpen] = useState(false);
   const [register, setRegister] = useState(false);
-   
+  const [selectedRoom, setSelectedRoom] = useState('');
+ 
   const handleLogin = (userData: User) => {
     const { username, password } = userData;
 
@@ -29,9 +36,23 @@ const App: React.FC = () => {
     setUser(null);
     localStorage.removeItem('username');
   }
-     
-  useEffect(() => {    
-    const localusername = localStorage.getItem('username');    
+  
+  const handleCreateRoom = (roomData: { name: string; description: string }) => {
+    const newRooms = [...rooms, roomData];
+    setRooms(newRooms);
+    localStorage.setItem('chatRooms', JSON.stringify(newRooms));
+  };
+
+  const handleJoinRoom = (roomName: string) => {    
+    setSelectedRoom(roomName);
+  };
+  
+  useEffect(() => {
+    const savedRooms = localStorage.getItem('chatRooms');
+    const localusername = localStorage.getItem('username');
+    if (savedRooms) {
+      setRooms(JSON.parse(savedRooms));
+    }
     if (localusername) {
       setUser({username: localusername, password: 'local'});
     }
@@ -75,7 +96,27 @@ const App: React.FC = () => {
             />          
           </>
         ) : null }        
-        
+        {(user && !selectedRoom) && (
+          <>
+            <div className="mt-4">
+              <button 
+                className="w-11/12 max-w-96 mt-1 bg-slate-600 hover:bg-slate-500 font-medium text-sm py-2 px-4 rounded-lg text-white"
+                onClick={() => setIsCreateRoomModalOpen(true)} 
+              > 
+                Criar Sala
+              </button>
+              <RoomList rooms={rooms} onJoin={handleJoinRoom} />
+            </div>            
+          </>
+        )}
+        {(user && selectedRoom) && (          
+          <ChatRoom username={user.username} roomName={selectedRoom} closeChatRoom={() => setSelectedRoom('')}/>
+        )}
+        <CreateRoomModal 
+          isOpen={isCreateRoomModalOpen} 
+          onClose={() => setIsCreateRoomModalOpen(false)} 
+          onCreate={handleCreateRoom} 
+        />       
       </div>
     </div>
   );
